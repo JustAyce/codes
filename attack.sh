@@ -2,7 +2,7 @@ sudo apt update
 git clone https://github.com/cube0x0/CVE-2021-1675.git ~/CVE-2021-1675
 git clone https://github.com/cube0x0/impacket.git ~/impacket
 
-cd impacket
+cd ~/impacket
 
 sudo python3 setup.py install
 # sudo python3 examples/rpcdump.py @172.168.1.4 | grep MS-RPRN
