@@ -1,0 +1,84 @@
+interfaces {
+    ethernet eth0 {
+        address dhcp
+        description "Connecting to Host thru NAT"
+        hw-id 08:00:27:8d:c0:4d
+        offload {
+            gro
+            gso
+            sg
+            tso
+        }
+    }
+    ethernet eth1 {
+        address 10.0.0.10/24
+    }
+    ethernet eth2 {
+        address 10.0.0.20/24
+    }
+    loopback lo {
+    }
+}
+service {
+    ssh {
+    }
+}
+system {
+    config-management {
+        commit-revisions 100
+    }
+    conntrack {
+        modules {
+            ftp
+            h323
+            nfs
+            pptp
+            sip
+            sqlnet
+            tftp
+        }
+    }
+    host-name vyos
+    login {
+        user vyos {
+            authentication {
+                encrypted-password $6$MjV2YvKQ56q$QbL562qhRoyUu8OaqrXagicvcsNpF1HssCY06ZxxghDJkBCfSfTE/4FlFB41xZcd/HqYyVBuRt8Zyq3ozJ0dc.
+                plaintext-password ""
+                public-keys vagrant {
+                    key AAAAB3NzaC1yc2EAAAADAQABAAABAQDJNIxfiewnkZnUbfdyyugDsDGwjnoKoGIoRL54I7f+1/6tWZgJq9fERjxVkyNn5dd8uwkj2PEG65fCyU/vbweYL/h+8bY4O7Rwf7X/FeEDE8I9NiADmsfzc6j4A87YM8KAICesifMc0e7p0RRFTY1hJBDuMh1TtxWZKScsfpVM1SQfIbizaJARZsVCHlBJyrFJMmh4BdjH5x5eP/+9ZQnT3lOhlhjmn5VF1NvlFcunN0peYybOMfvftDCWK975oabhXOAYXIfXxTs2febIRvEqr1ZV/Jgt7e6UVe6dd/dgARmkVJCs/+XPoywjyayExOxAOXXFAYVGaK/lbYX6adIf
+                    type ssh-rsa
+                }
+            }
+        }
+    }
+    name-server eth0
+    ntp {
+        server time1.vyos.net {
+        }
+        server time2.vyos.net {
+        }
+        server time3.vyos.net {
+        }
+    }
+    syslog {
+        global {
+            facility all {
+                level notice
+            }
+            facility protocols {
+                level debug
+            }
+        }
+        host 10.0.0.101 {
+            facility syslog {
+                level notice
+            }
+            port 514
+        }
+    }
+}
+
+
+// Warning: Do not remove the following line.
+// vyos-config-version: "bgp@3:broadcast-relay@1:cluster@1:config-management@1:conntrack@3:conntrack-sync@2:dhcp-relay@2:dhcp-server@6:dhcpv6-server@1:dns-forwarding@3:firewall@8:flow-accounting@1:https@3:interfaces@26:ipoe-server@1:ipsec@10:isis@1:l2tp@4:lldp@1:mdns@1:monitoring@1:nat@5:nat66@1:ntp@1:openconnect@2:ospf@1:policy@3:pppoe-server@6:pptp@2:qos@1:quagga@10:rpki@1:salt@1:snmp@2:ssh@2:sstp@4:system@25:vrf@3:vrrp@3:vyos-accel-ppp@2:wanloadbalance@3:webproxy@2"
+// Release version: 1.4-rolling-202209250853
