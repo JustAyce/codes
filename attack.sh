@@ -24,7 +24,7 @@ echo "
     guest ok = yes
     read only = no
     browsable = yes
-" >> /etc/samba/smb.conf
+" | sudo tee -a /etc/samba/smb.conf
 sudo systemctl start smbd
 smbshare
 
