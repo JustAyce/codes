@@ -16,7 +16,7 @@ else
 fi
 sudo docker import test.tar.gz vyos:1.4-rolling-202209260217
 sudo umount rootfs
-cd ..
-sudo rm -rf vyos
+# cd ..
+# sudo rm -rf vyos
 sudo docker run -d --rm --name vyos --privileged -v /lib/modules:/lib/modules vyos:1.4-rolling-202209260217 /sbin/init
 sudo docker exec -ti vyos su - vyos
