@@ -7,14 +7,8 @@ sudo mount -o loop vyos-1.4-rolling-202209260217-amd64.iso rootfs
 sudo apt-get install -y squashfs-tools
 mkdir ~/vyos/unsquashfs
 sudo unsquashfs -f -d unsquashfs/ rootfs/live/filesystem.squashfs
-# sudo tar -C unsquashfs -c . | sudo docker import - vyos:1.4-rolling-202209260217
-if sudo tar -zcvf test.tar.gz unsquashfs | grep error
-then
-	exit 1
-else
-	:
-fi
-sudo docker import test.tar.gz vyos:1.4-rolling-202209260217
+sudo tar -C unsquashfs -c . | sudo docker import - vyos:1.4-rolling-202209260217
+# sudo tar -zcvf test.tar.gz unsquashfs && sudo docker import test.tar.gz vyos:1.4-rolling-202209260217
 sudo umount rootfs
 # cd ..
 # sudo rm -rf vyos
