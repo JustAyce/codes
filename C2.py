@@ -1,11 +1,9 @@
 import re
 import socket
 from flask import Flask, render_template, request
-
 import subprocess
-
-def crack_hash(f):
-
+UPLOAD_FOLDER = '~/'
+app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload():
@@ -21,6 +19,12 @@ def upload():
                 return "Nice"
 # curl -X POST -F file=@hash.txt http://127.0.0.1:5000
 app.run()
+
+def crack_hash(f):
+    command = "sudo john --format=LM --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt > cracked.txt"
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+    print(proc.pid)
+    return True
 
 
 def format_hash():
