@@ -27,9 +27,9 @@ def upload():
     return ('upload.html')
 
 def crack_hash(f):
-    command = "sudo john --format=NT --wordlist=/usr/share/wordlists/rockyou.txt "+f+" > cracked.txt"
+    command = "sudo john --format=LM --wordlist=/home/vagrant/wordlist.txt "+f+" > cracked.txt"
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-    print(proc.pid)
+    print(command, proc.pid)
     return True
 
 """
